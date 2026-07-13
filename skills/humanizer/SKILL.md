@@ -12,6 +12,8 @@ allowed-tools:
 
 # Humanizer: Make Text Sound Like a Human Wrote It
 
+[![Humanizer upstream](https://img.shields.io/github/stars/Aboudjem/humanizer-skill?label=upstream%20humanizer)](https://github.com/Aboudjem/humanizer-skill)
+
 Take text that smells like a chatbot wrote it and rewrite it as a specific, opinionated human. Detects 43 AI writing patterns, scores them 0-100, applies a chosen voice profile, and varies sentence-length burstiness so the result reads as written by a person.
 
 ## Quick reference
@@ -31,6 +33,7 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 | `casual` | Contractions, first person, fragments | Blog posts, social media |
 | `professional` | Selective contractions, dry wit | Business comms, reports |
 | `technical` | Precise vocabulary, code-like clarity | API docs, READMEs |
+| `technical-writer` | Claim-led, evidence-aware, mechanism-first prose | Papers, LaTeX, technical docs, slides, AI/ML/data writing |
 | `warm` | "We" language, empathy, short paragraphs | Tutorials, onboarding |
 | `blunt` | Shortest sentences, no hedging, active voice | Internal comms, reviews |
 
@@ -48,7 +51,7 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 
 | Flag | Effect |
 |:-----|:-------|
-| `--score` | Prepend a `[Score: NN/100]` AI-tell density header |
+| `--score` | Prepend a `[Score: NN/100]` AI-tell density header using the scoring rubric below |
 | `--iterate N` | Loop detect, rewrite, detect until convergence (max N=3) |
 | `--aggressive` | Heavier rewrite, shorter sentences, more personality |
 | `--purpose` | Layer `essay`, `email`, `marketing`, `technical`, or `general` rules |
@@ -62,6 +65,26 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 - You want the skill to edit a Markdown file in place rather than print a rewrite to chat
 
 Auto-loads `humanizer-context.md` from the project root if present. Use that file for brand samples and banned phrases.
+
+### Activation and usage
+
+Activate this skill for any writing task, including drafting, editing, rewriting, summarizing, synthesizing data into prose or structured text, and preparing content for publication. Use `detect` when you need an audit without edits, `rewrite` for a full transformation, and `edit` for minimal in-place changes.
+
+For technical writing, select `--voice technical-writer` or let the technical context route to that voice. The voice extension follows the companion [Technical Writer Voice skill](../technical-writer-voice/SKILL.md), which is based on the Red Queen Gödel paper’s observable prose traits: explicit mechanisms, claim-led structure, quantified evidence, and bounded conclusions.
+
+Examples:
+
+```text
+/humanizer "Draft text" --mode detect --score
+/humanizer --file README.md --voice technical-writer --purpose technical --mode edit
+/humanizer "Experiment summary" --voice technical-writer --score
+```
+
+### Bring your own voice
+
+Create `humanizer-context.md` in the project root to extend any built-in voice. Include representative writing samples, preferred terminology, audience, spelling conventions, formatting rules, and banned phrases. Load it before rewriting and treat it as higher-priority style guidance than generic voice defaults, while preserving factual and technical correctness.
+
+The `technical-writer` voice is the repository’s first reusable voice extension. Add future voices as separate Codex skills or clearly scoped sections, then reference them from this table and their own skill file.
 
 ## Operating principles
 
@@ -84,7 +107,7 @@ Extract from `$ARGUMENTS`:
   - `detect`: Scan text and report AI patterns found (no changes)
   - `rewrite`: Full rewrite, output the humanized version
   - `edit`: Read `--file`, apply changes in-place using Edit tool
-- **--voice**: One of `casual`, `professional`, `technical`, `warm`, `blunt`. Optional. Adjusts the personality injection. Default: infer from input text register.
+- **--voice**: One of `casual`, `professional`, `technical`, `technical-writer`, `warm`, `blunt`. Optional. Adjusts the personality injection. Default: infer from input text register.
 - **--file**: Path to a file to humanize. If provided, read the file as input. Combined with `--mode edit`, applies changes in-place.
 - **--aggressive**: Flag. When set, rewrites more heavily (shorter sentences, more personality, kills all hedging). Default: balanced.
 - **--iterate N**: Optional. Runs detect → rewrite → detect up to N times (N <= 3). Stops early when the detection report finds zero patterns. Default: 1 (single pass).
@@ -312,6 +335,14 @@ Apply based on `--voice` flag (or infer from input):
 - Allowed: dry, deadpan observations about technical absurdity
 - No metaphors unless they genuinely clarify (most don't)
 - Concrete numbers > vague quantities
+
+#### technical-writer
+- Lead with the problem, result, or decision rather than a generic overview.
+- Define the mechanism before claiming its benefits; state what is fixed, what changes, and when.
+- Separate observed results, interpretation, and proposal.
+- Prefer baselines, deltas, costs, uncertainty, and evaluation context over adjectives.
+- Preserve equations, code, terminology, and caveats. Do not strengthen claims while polishing them.
+- Use compact paragraphs and sentence-case headings; avoid marketing language and unsupported significance.
 
 #### warm
 - Contractions always

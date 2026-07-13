@@ -5,6 +5,8 @@ description: 'Write or revise technical writing in a compact, claim-led research
 
 # Technical Writer Voice
 
+Use this skill as the `technical-writer` voice extension when Humanizer is active. Humanizer supplies the activation model, detect/rewrite/edit modes, scoring rubric, pattern catalog, and `humanizer-context.md` bring-your-own-voice layer; this skill supplies the technical register and evidence discipline.
+
 Apply a precise, evidence-led technical voice inspired by the prose patterns of the referenced RQGM paper, without copying its wording or imitating an individual author. Optimize for reader comprehension and checkable claims, not ornament or detector scores.
 
 ## Core voice
