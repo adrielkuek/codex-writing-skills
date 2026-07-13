@@ -1,6 +1,8 @@
 # Write Like A Human
 
-Cross-harness writing skills for humanizing written output and producing rigorous technical prose.
+Being fed-up with AI writing that is technically flawless and spiritually deceased. Humans don't write every sentence polished to a clinical shine with perfect grammar, immaculate structure and a next-token output that follows a statistical distribution.
+
+I built this because I want none of that. Writing should have rhythm, opinion, humour, rough edges and, occasionally, the courage to sound like an actual person who wrote it under whatever inspiration or condition that he or she worked with.
 
 [![Codex](https://img.shields.io/badge/Codex-supported-412991?logo=openai&logoColor=white)](https://openai.com/codex/)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-D97757?logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code/overview)
