@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Writer Voice"
+  short_description: "Write precise, evidence-led technical prose"
+  default_prompt: "Apply the technical-writer voice to this draft while preserving claims, caveats, and code-level precision."
