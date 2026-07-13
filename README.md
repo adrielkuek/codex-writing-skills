@@ -38,6 +38,41 @@ cp -R ~/.codex/codex-writing-skills/skills/. ~/.codex/skills/
 
 Restart or start a new Codex turn after installation so the skill catalog refreshes.
 
+## Sample usage
+
+Humanizer accepts text directly or reads a file:
+
+```text
+/humanizer "Rewrite this draft so it sounds less generic."
+/humanizer "Summarize these experiment results for a project update." --voice professional
+/humanizer "Turn this table of observations into a concise findings section." --purpose technical
+/humanizer --file README.md --voice technical-writer --purpose technical --mode edit
+/humanizer "Audit this paper abstract without changing it." --mode detect --score
+/humanizer "Rewrite this blog draft with a stronger personal voice." --voice casual --iterate 2
+```
+
+### Modes
+
+| Flag | Purpose |
+|:-----|:--------|
+| `--mode detect` | Report detected writing patterns without rewriting. |
+| `--mode rewrite` | Rewrite the text with the selected voice. This is the default. |
+| `--mode edit` | Apply minimal edits to a file in place. |
+
+### Flags
+
+| Flag | Values or effect |
+|:-----|:-----------------|
+| `--mode` | `detect`, `rewrite`, or `edit`. |
+| `--voice` | `casual`, `professional`, `technical`, `technical-writer`, `warm`, or `blunt`. |
+| `--file` | Read the input from a file; combine with `--mode edit` for in-place editing. |
+| `--purpose` | `essay`, `email`, `marketing`, `technical`, or `general`. |
+| `--score` | Add a 0-100 AI-tell density score to the output. Lower is more human. |
+| `--iterate N` | Repeat detect → rewrite up to `N` times, with a maximum of 3. |
+| `--aggressive` | Apply a heavier rewrite with shorter sentences and stronger voice. |
+
+Create `humanizer-context.md` in a project root to provide samples, preferred terms, formatting rules, and banned phrases for a custom voice.
+
 ## Local validation
 
 ```bash
