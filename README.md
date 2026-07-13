@@ -1,7 +1,9 @@
-# Codex Writing Skills
+# Write Like A Human
 
-Personal Codex skills for humanizing written output and producing rigorous technical prose.
+Cross-harness writing skills for humanizing written output and producing rigorous technical prose.
 
+[![Codex](https://img.shields.io/badge/Codex-supported-412991?logo=openai&logoColor=white)](https://openai.com/codex/)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-D97757?logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code/overview)
 [![Humanizer upstream](https://img.shields.io/github/stars/Aboudjem/humanizer-skill?label=Humanizer%20upstream)](https://github.com/Aboudjem/humanizer-skill)
 
 ## Included
@@ -17,26 +19,52 @@ Humanizer is derived from [Aboudjem/humanizer-skill](https://github.com/Aboudjem
 
 GitHub Actions also runs this check weekly and on demand. A failure means upstream moved and the local adaptation needs review.
 
-The local Humanizer includes Codex-compatible metadata and the `technical-writer` voice extension. Review upstream changes before merging them into `skills/humanizer/SKILL.md`.
+The skills are plain Markdown and are packaged for both Codex and Claude Code. The local Humanizer includes shared-harness metadata and the `technical-writer` voice extension. Review upstream changes before merging them into `skills/humanizer/SKILL.md`.
 
-## Install on another machine
+## Install in Codex
 
-Clone this repository, then copy the skill folders into the global Codex skills directory:
+Global installation:
 
 ```bash
-git clone <your-github-repo-url> ~/.codex/codex-writing-skills
+git clone https://github.com/adrielkuek/Write-Like-A-Human.git ~/.codex/write-like-a-human
 mkdir -p ~/.codex/skills
-cp -R ~/.codex/codex-writing-skills/skills/. ~/.codex/skills/
+cp -R ~/.codex/write-like-a-human/skills/. ~/.codex/skills/
 ```
 
-To update later:
+Project-scoped installation:
 
 ```bash
-git -C ~/.codex/codex-writing-skills pull
-cp -R ~/.codex/codex-writing-skills/skills/. ~/.codex/skills/
+git clone https://github.com/adrielkuek/Write-Like-A-Human.git .write-like-a-human
+mkdir -p .codex/skills
+cp -R .write-like-a-human/skills/. .codex/skills/
 ```
 
-Restart or start a new Codex turn after installation so the skill catalog refreshes.
+## Install in Claude Code
+
+Global installation:
+
+```bash
+git clone https://github.com/adrielkuek/Write-Like-A-Human.git ~/.claude/write-like-a-human
+mkdir -p ~/.claude/skills
+cp -R ~/.claude/write-like-a-human/skills/. ~/.claude/skills/
+```
+
+Project-scoped installation:
+
+```bash
+git clone https://github.com/adrielkuek/Write-Like-A-Human.git .write-like-a-human
+mkdir -p .claude/skills
+cp -R .write-like-a-human/skills/. .claude/skills/
+```
+
+To update a global installation on either harness:
+
+```bash
+git -C ~/.codex/write-like-a-human pull   # Codex
+git -C ~/.claude/write-like-a-human pull  # Claude Code
+```
+
+Copy the updated `skills/.` directory into the corresponding harness directory again. Start a new session after installation or updates so the skill catalog refreshes.
 
 ## Sample usage
 
